@@ -1,57 +1,55 @@
-# NewsApp
+# NewsFeed Application
 
-A simple news aggregation web app that fetches the latest news articles from the NewsAPI and displays them based on user preferences. The app allows users to log in, sign up, view news articles, and extract relevant keywords from the article descriptions. These keywords are stored and used to suggest future news articles.
+NewsFeed is a React-based web application that aggregates and displays news articles from various sources. Users can browse news articles, search for specific topics, and view detailed information about each article.
 
 ## Features
 
-- **User Authentication**: Users can sign up or log in to access personalized news recommendations.
-- **News Fetching**: Fetches news articles using the NewsAPI based on user keywords or a default query.
-- **Keyword Extraction**: Extracts keywords from article descriptions and stores them to suggest future news.
-- **Persistent Storage**: User data and preferences are saved in localStorage for session persistence.
-- **Responsive UI**: Simple user interface with a fixed logout button that fades out upon logging out.
+- Browse news articles by category
+- Search for news articles
+- View detailed information about each article
+- Responsive design
+- User Authentication
+- Personalization of News Articles over time using Keyword Extraction
 
-## Installation and Setup
-
-To get the project up and running, follow these steps:
-
-### Prerequisites
-
-Ensure that you have **Node.js** installed. You can download it [here](https://nodejs.org/).
-
-### Installation Steps
+## Installation
 
 1. Clone the repository:
+    ```sh
+    git clone https://github.com/yourusername/newsfeed.git
+    cd newsfeed
+    ```
 
-   ```bash
-   git clone https://github.com/yourusername/NewsApp.git
-   cd NewsApp
-2. Install the required packages
-   ```bash
-   npm install
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
 
-3. Set up an account on [NewsAPI](https://newsapi.org/) and get your API key. Replace the placeholder `API_KEY` in the code with your actual API key.
+## Usage
 
-### Running the App
+1. Start the development server:
+    ```sh
+    npm start
+    ```
 
-After installing the necessary packages, you can start the development server:
+2. Open your browser and navigate to `http://localhost:3000`.
 
-```bash
-npm start
-```
+## Project Structure
 
-This will run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- `public/`: Contains static files such as `index.html`, `manifest.json`, and `robots.txt`.
+- `src/`: Contains the source code of the application.
+  - `components/`: Contains React components like `NewsApp`, `NewsCard`, `NavBar`, and `SearchBar`.
+  - `App.js`: Main application component.
+  - `index.js`: Entry point of the application.
+  - `App.css`: Main stylesheet for the application.
 
-### Packages Used
+## Dependencies
 
-- **React**: For building the user interface.
-- **Axios**: For making HTTP requests to the NewsAPI.
-- **Node.js**: Used to run the local development server.
+- React
+- Axios
+- Express
+- Mongoose
+- CORS
 
-### Future Improvements
+## Video Tech Demo
 
-- Add proper authentication backend.
-- Add pagination for news articles.
-- Improve the UI/UX with better design components.
-
-
-This Project was made as a submission for the WEC-2024 GDG Recruitments tasks.
+[Insert Video Tech Demo Link Here]
