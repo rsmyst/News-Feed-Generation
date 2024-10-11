@@ -5,6 +5,35 @@ import axios from "axios";
 import NewsCard from "./NewsCard";
 import NavBar from "./NavBar";
 
+/**
+ * NewsApp component handles the main functionality of the news application.
+ * It manages user authentication (login/signup), fetches news articles based on keywords,
+ * and displays the news articles and extracted keywords.
+ *
+ * State Variables:
+ * - articles: Array of news articles fetched from the API.
+ * - loading: Boolean indicating if the news articles are being loaded.
+ * - keywords: Array of extracted keywords from the news articles.
+ * - loggedIn: Boolean indicating if the user is logged in.
+ * - name: String representing the user's name for login/signup.
+ * - password: String representing the user's password for login/signup.
+ * - isSignup: Boolean indicating if the user is in signup mode.
+ *
+ * Functions:
+ * - fetchNews(query): Fetches news articles based on the provided query and updates the state.
+ * - fetchKeywords(combinedDescriptions): Fetches keywords from the server based on combined descriptions of articles.
+ * - handleLogin(): Handles user login by verifying credentials and updating the state.
+ * - handleSignup(): Handles user signup by storing new user data and updating the state.
+ * - handleLogout(): Handles user logout by updating the state and clearing local storage.
+ * - renderLoginSignup(): Renders the login/signup form.
+ * - renderNewsApp(): Renders the main news application interface.
+ *
+ * useEffect:
+ * - Fetches news articles based on user keywords or a default query when the user logs in.
+ *
+ * Returns:
+ * - JSX element representing the NewsApp component.
+ */
 const NewsApp = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,16 +54,13 @@ const NewsApp = () => {
       );
       const articles = response.data.articles;
 
-      // Combine descriptions from the first 10 articles
       const combinedDescriptions = articles
         .slice(0, 10)
         .map((article) => article.description || "")
         .join(" ");
 
-      // Set the articles to the state
       setArticles(articles);
 
-      // Send the combined descriptions to the Node backend
       await fetchKeywords(combinedDescriptions);
     } catch (error) {
       console.error("Error fetching news:", error);
@@ -54,39 +80,32 @@ const NewsApp = () => {
       });
 
       const data = await response.json();
-      const newKeywords = data.keywords; // Assume this is an array of [keyword, score]
+      const newKeywords = data.keywords;
 
-      // Get the current user from local storage
       const currentUser = localStorage.getItem("currentUser");
 
-      // Get existing keywords from local storage
       const userData = JSON.parse(localStorage.getItem("userData")) || {};
       const existingUserKeywords = userData[currentUser] || [];
-
-      // Combine and deduplicate keywords
+      //Combine existing and new keywords
       const combinedKeywords = [...existingUserKeywords, ...newKeywords];
 
-      // Convert combined keywords to a Map for deduplication and scoring
+      // Create a map to store the highest score for each keyword
       const keywordMap = new Map();
       combinedKeywords.forEach(([keyword, score]) => {
         if (keywordMap.has(keyword)) {
           const existingScore = keywordMap.get(keyword);
-          // Update score if the new score is higher
           keywordMap.set(keyword, Math.max(existingScore, score));
         } else {
           keywordMap.set(keyword, score);
         }
       });
-
-      // Convert the Map back to an array and sort it by score
+      //Sorting keywords and retaining the top 10
       const sortedKeywords = Array.from(keywordMap.entries())
-        .sort((a, b) => b[1] - a[1]) // Sort by score in descending order
-        .slice(0, 10); // Keep only the top 5 keywords
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10);
 
-      // Update the state
       setKeywords(sortedKeywords);
 
-      // Store the updated keywords in local storage for the current user
       userData[currentUser] = sortedKeywords;
       localStorage.setItem("userData", JSON.stringify(userData));
     } catch (error) {
@@ -100,7 +119,7 @@ const NewsApp = () => {
     if (loggedIn && currentUser) {
       const userData = JSON.parse(localStorage.getItem("userData")) || {};
       const userKeywords = userData[currentUser] || [];
-
+      //Fetch news based on a random keyword the user has
       if (userKeywords.length > 0) {
         const randomKeyword =
           userKeywords[Math.floor(Math.random() * userKeywords.length)][0];
@@ -116,8 +135,7 @@ const NewsApp = () => {
     const user = users.find((u) => u.name === name && u.password === password);
     if (user) {
       setLoggedIn(true);
-      localStorage.setItem("currentUser", name); // Store the logged-in user
-      // Clear inputs after successful login
+      localStorage.setItem("currentUser", name);
       setName("");
       setPassword("");
     } else {
@@ -136,12 +154,11 @@ const NewsApp = () => {
 
       // Initialize an empty keywords array for the new user
       const userData = JSON.parse(localStorage.getItem("userData")) || {};
-      userData[name] = []; // Initialize with no keywords
+      userData[name] = [];
       localStorage.setItem("userData", JSON.stringify(userData));
 
       setLoggedIn(true);
-      localStorage.setItem("currentUser", name); // Store the logged-in user
-      // Clear inputs after successful signup
+      localStorage.setItem("currentUser", name);
       setName("");
       setPassword("");
     } else {
@@ -151,7 +168,7 @@ const NewsApp = () => {
 
   const handleLogout = () => {
     setLoggedIn(false);
-    localStorage.removeItem("currentUser"); // Remove the current user on logout
+    localStorage.removeItem("currentUser");
   };
 
   const renderLoginSignup = () => (
