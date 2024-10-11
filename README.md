@@ -56,6 +56,9 @@ https://github.com/user-attachments/assets/baf9ee7b-34af-4dff-b9aa-68c8b99aaa4c
 - Mongoose
 - CORS
 
-## Video Tech Demo
+## References
+- https://www.youtube.com/watch?v=-FldHnejaA4 (JS News App project. i rebuilt the app in react and further worked on it to added login functionality, keyword extraction, and improved styling)
+
+
 
 [Insert Video Tech Demo Link Here]
