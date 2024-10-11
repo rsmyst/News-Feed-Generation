@@ -2,6 +2,12 @@
 
 NewsFeed is a React-based web application that aggregates and displays news articles from various sources. Users can browse news articles, search for specific topics, and view detailed information about each article.
 
+![image](https://github.com/user-attachments/assets/3e19db87-754c-469a-86ee-9d2e5ac034ba)
+
+
+https://github.com/user-attachments/assets/baf9ee7b-34af-4dff-b9aa-68c8b99aaa4c
+
+
 ## Features
 
 - Browse news articles by category
