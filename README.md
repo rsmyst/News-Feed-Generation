@@ -1,6 +1,7 @@
 # NewsFeed Application
 
 NewsFeed is a React-based web application that aggregates and displays news articles from various sources. Users can browse news articles, search for specific topics, and view detailed information about each article.
+Major breakthrough I had when doing this project was a backend CORS issue to send fetch requests to various services. Found 2 separate solutions for it over the course of completing these WEC GDG tasks.
 
 ![image](https://github.com/user-attachments/assets/3e19db87-754c-469a-86ee-9d2e5ac034ba)
 
