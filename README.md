@@ -1,4 +1,4 @@
-# NewsFeed Application
+# News Feed Generation Application
 
 NewsFeed is a React-based web application that aggregates and displays news articles from various sources. Users can browse news articles, search for specific topics, and view detailed information about each article.
 Major breakthrough I had when doing this project was a backend CORS issue to send fetch requests to various services. Found 2 separate solutions for it over the course of completing these WEC GDG tasks.
@@ -22,8 +22,8 @@ https://github.com/user-attachments/assets/baf9ee7b-34af-4dff-b9aa-68c8b99aaa4c
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/newsfeed.git
-    cd newsfeed
+    git clone https://github.com/rsmyst/News-Feed-Generation.git
+    cd News-Feed-Generation
     ```
 
 2. Install dependencies:
